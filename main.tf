@@ -15,16 +15,16 @@ terraform {
   required_version = ">= 1.1.0"
 
   cloud {
-    organization = "REPLACE_ME"
+    organization = "koisland"
 
     workspaces {
-      name = "learn-terraform-github-actions"
+      name = "aws_terraform_smk_pipeline"
     }
   }
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-west-1"
 }
 
 resource "random_pet" "sg" {}
