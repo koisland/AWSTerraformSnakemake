@@ -1,3 +1,4 @@
+# Batch
 output "batch_compute_env_id" {
   value = aws_batch_compute_environment.standard.id
 }
@@ -10,14 +11,24 @@ output "batch_job_queue_id" {
   value = aws_batch_job_queue.main_queue.id
 }
 
+# S3
 output "s3_smk_output_bucket_id" {
-    value = aws_s3_bucket.output.id
+  value = aws_s3_bucket.output.id
 }
 
-output "s3_smk_output_bucket_acl_id" {
-    value = aws_s3_bucket_acl.output_acl.id
+output "s3_smk_output_bucket_access_blk_id" {
+  value = aws_s3_bucket_public_access_block.output_access.id
 }
 
+output "s3_smk_output_server_side_encryption_id" {
+  value = aws_s3_bucket_server_side_encryption_configuration.output_encryption.id
+}
+
+output "s3_smk_output_bucket_versioning_id" {
+  value = aws_s3_bucket_versioning.output_versioning.id
+}
+
+# IAM
 output "iam_ec2_inst_profile_id" {
   value = aws_iam_instance_profile.ec2_profile.id
 }
