@@ -1,6 +1,9 @@
-# Automate Terraform with GitHub Actions
+# AWS Batch Snakemake Pipeline with Terraform
 
-This repo is a companion repo to the [Automate Terraform with GitHub Actions tutorial](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions).
+![](docs/graph.svg)
+
+## Sources
+Based on the [Automate Terraform with GitHub Actions tutorial](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions).
 
 Adopted Batch workflow from:
 * https://medium.com/swlh/terraform-aws-batch-and-aws-efs-8682c112d742
