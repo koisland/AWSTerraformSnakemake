@@ -7,9 +7,11 @@ variable "image" {
 variable "batch_max_vcpus" {
   description = "Batch max VCPUs."
   type        = number
-  default = 2
+  default     = 2
 }
 
 variable "name" {
-  default = ""
+  description = "Name of pipeline"
+  type        = string
+  default     = ""
 }

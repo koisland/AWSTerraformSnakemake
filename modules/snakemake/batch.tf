@@ -2,15 +2,9 @@
 # Security Group for batch processing
 resource "aws_security_group" "batch_standard" {
   name        = "${var.name}_batch_standard"
-  description = "AWS Batch Security Group for batch jobs"
+  description = "AWS Batch Security Group for batch jobs."
   vpc_id      = data.aws_vpc.default.id
 
-  egress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
   tags = {
     created-by = "terraform"
   }
@@ -56,8 +50,8 @@ resource "aws_batch_job_definition" "standard" {
   type       = "container"
   parameters = {}
   container_properties = jsonencode({
-    "image"      = "${var.image}",
-    "jobRoleArn" = "${aws_iam_role.ecs_job_role.arn}",
+    "image"      = var.image,
+    "jobRoleArn" = aws_iam_role.ecs_job_role.arn,
   })
   tags = {
     created-by = "terraform"

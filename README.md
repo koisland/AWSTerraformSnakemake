@@ -10,3 +10,6 @@ Adopted Batch workflow from:
 
 Best Practices:
 * https://cloud.google.com/docs/terraform/best-practices-for-terraform
+
+Pre-commit:
+* https://jamescook.dev/pre-commit-for-terraform

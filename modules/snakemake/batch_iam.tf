@@ -17,6 +17,7 @@ resource "aws_iam_role" "ecs_job_role" {
 }
 
 # S3 read/write policy
+# tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_policy" "read_write_s3" {
   name = "${var.name}_read_write_s3"
   policy = jsonencode({
@@ -24,12 +25,10 @@ resource "aws_iam_policy" "read_write_s3" {
     "Statement" = [{
       "Effect" = "Allow",
       "Action" = [
-        "s3:Get*",
-        "s3:List*",
-        "s3:Put*"
+        "s3:GetObject",
+        "s3:PutObject"
       ],
       "Resource" = [
-        "${aws_s3_bucket.output.arn}",
         "${aws_s3_bucket.output.arn}/*"
       ]
     }]
