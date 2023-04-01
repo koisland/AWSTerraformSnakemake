@@ -1,13 +1,21 @@
 output "batch_compute_env_id" {
-  value = aws_batch_compute_environment.batch_environment.id
+  value = aws_batch_compute_environment.standard.id
 }
 
 output "batch_job_def_id" {
-  value = aws_batch_job_definition.job.id
+  value = aws_batch_job_definition.standard.id
 }
 
 output "batch_job_queue_id" {
-  value = aws_batch_job_queue.job_queue.id
+  value = aws_batch_job_queue.main_queue.id
+}
+
+output "s3_smk_output_bucket_id" {
+    value = aws_s3_bucket.output.id
+}
+
+output "s3_smk_output_bucket_acl_id" {
+    value = aws_s3_bucket_acl.output_acl.id
 }
 
 output "iam_ec2_inst_profile_id" {
@@ -15,7 +23,7 @@ output "iam_ec2_inst_profile_id" {
 }
 
 output "iam_policy_s3_id" {
-  value = aws_iam_policy.s3_policy.id
+  value = aws_iam_policy.read_write_s3.id
 }
 
 output "iam_role_batch_id" {

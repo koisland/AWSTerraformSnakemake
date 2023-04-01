@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 terraform {
   required_providers {
     aws = {
@@ -20,14 +17,11 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region = "us-west-1"
 }
 
-# Security Setup
-# Retrieves the default vpc for this region
-data "aws_vpc" "default" {
-  default = true
+module "snakemake" {
+  source = "./modules/snakemake"
+  name = "snakemake"
+  image = "snakemake/snakemake:latest"
 }
-
-# Retrieves the subnet ids in the default vpc
-data "aws_subnets" "default" {}

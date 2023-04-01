@@ -1,7 +1,7 @@
 
 # Security Group for batch processing
-resource "aws_security_group" "batch_security_group" {
-  name        = "batch_security_group"
+resource "aws_security_group" "batch_standard" {
+  name        = "${var.name}_batch_standard"
   description = "AWS Batch Security Group for batch jobs"
   vpc_id      = data.aws_vpc.default.id
 
@@ -16,17 +16,17 @@ resource "aws_security_group" "batch_security_group" {
   }
 }
 
-resource "aws_batch_compute_environment" "batch_environment" {
-  compute_environment_name = "batch-environment"
+resource "aws_batch_compute_environment" "standard" {
+  compute_environment_name = "${var.name}_standard"
   compute_resources {
     instance_role = aws_iam_instance_profile.ec2_profile.arn
     instance_type = [
       "optimal"
     ]
-    max_vcpus = 2
+    max_vcpus = var.batch_max_vcpus
     min_vcpus = 0
     security_group_ids = [
-      aws_security_group.batch_security_group.id,
+      aws_security_group.batch_standard.id,
     ]
     subnets = data.aws_subnets.default.ids
     type    = "EC2"
@@ -38,31 +38,27 @@ resource "aws_batch_compute_environment" "batch_environment" {
   }
 }
 
-resource "aws_batch_job_queue" "job_queue" {
-  name     = "job_queue"
+resource "aws_batch_job_queue" "main_queue" {
+  name     = "${var.name}_main_queue"
   state    = "ENABLED"
   priority = 1
   compute_environments = [
-    aws_batch_compute_environment.batch_environment.arn
+    aws_batch_compute_environment.standard.arn
   ]
-  depends_on = [aws_batch_compute_environment.batch_environment]
+  depends_on = [aws_batch_compute_environment.standard]
   tags = {
     created-by = "terraform"
   }
 }
 
-resource "aws_batch_job_definition" "job" {
-  name                 = "job"
-  type                 = "container"
-  parameters           = {}
-  container_properties = <<CONTAINER_PROPERTIES
-    {
-    "image": "${var.image}",
-    "jobRoleArn": "${aws_iam_role.ecs_job_role.arn}",
-    "vcpus": 2,
-    "memory": 1024,
-    }
-    CONTAINER_PROPERTIES
+resource "aws_batch_job_definition" "standard" {
+  name       = "${var.name}_standard"
+  type       = "container"
+  parameters = {}
+  container_properties = jsonencode({
+    "image"      = "${var.image}",
+    "jobRoleArn" = "${aws_iam_role.ecs_job_role.arn}",
+  })
   tags = {
     created-by = "terraform"
   }
