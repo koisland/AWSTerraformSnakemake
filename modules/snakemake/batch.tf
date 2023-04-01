@@ -52,6 +52,8 @@ resource "aws_batch_job_definition" "standard" {
   container_properties = jsonencode({
     "image"      = var.image,
     "jobRoleArn" = aws_iam_role.ecs_job_role.arn,
+    "vcpus"      = 2,
+    "memory"     = 1024,
   })
   tags = {
     created-by = "terraform"
