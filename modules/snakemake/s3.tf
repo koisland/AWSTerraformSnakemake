@@ -3,7 +3,7 @@ module "s3_smk_output" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = ">= 3.8.2"
 
-  bucket                  = "${var.name}_output"
+  bucket                  = "${var.name}-output"
   acl                     = "private"
   restrict_public_buckets = true
   ignore_public_acls      = true
@@ -29,7 +29,7 @@ module "s3_smk_input" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = ">= 3.8.2"
 
-  bucket                  = "${var.name}_input"
+  bucket                  = "${var.name}-input"
   acl                     = "private"
   restrict_public_buckets = true
   ignore_public_acls      = true
