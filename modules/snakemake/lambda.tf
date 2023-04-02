@@ -12,17 +12,29 @@ module "lambda_function" {
   source_path = "${path.module}/lambda_py"
 
   # Allow accessing any object in input bucket.
+  # Also allow to submit batch jobs.
   policy_json = jsonencode({
     "Version" : "2012-10-17",
-    "Statement" : [{
-      "Action" : [
-        "s3:*GetObject"
-      ],
-      "Resource" : [
-        "arn:aws:s3:::${module.s3_smk_input.s3_bucket_id}/*"
-      ],
-      "Effect" : "Allow"
-    }]
+    "Statement" : [
+      {
+        "Action" : [
+          "s3:*GetObject"
+        ],
+        "Resource" : [
+          "arn:aws:s3:::${module.s3_smk_input.s3_bucket_id}/*"
+        ],
+        "Effect" : "Allow"
+      },
+      {
+        "Action" : [
+          "batch:SubmitJob",
+          "batch:DescribeJobs",
+          "batch:TerminateJob"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow"
+      },
+    ]
   })
 
   # Allow S3 to trigger.
