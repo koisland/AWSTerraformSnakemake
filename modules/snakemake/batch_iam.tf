@@ -29,7 +29,8 @@ resource "aws_iam_policy" "read_write_s3" {
         "s3:PutObject"
       ],
       "Resource" = [
-        "${aws_s3_bucket.output.arn}/*"
+        "${module.s3_smk_input.s3_bucket_arn}/*",
+        "${module.s3_smk_output.s3_bucket_arn}/*"
       ]
     }]
   })

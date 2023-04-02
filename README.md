@@ -1,7 +1,5 @@
 # AWS Batch Snakemake Pipeline with Terraform
 
-![](docs/graph.svg)
-
 ## Sources
 Based on the [Automate Terraform with GitHub Actions tutorial](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions).
 
@@ -16,3 +14,6 @@ Best Practices:
 
 Pre-commit:
 * https://jamescook.dev/pre-commit-for-terraform
+
+Cloudwatch
+* https://github.com/turnerlabs/terraform-scheduled-batch-job/blob/master/main.tf

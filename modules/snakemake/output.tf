@@ -11,22 +11,13 @@ output "batch_job_queue_id" {
   value = aws_batch_job_queue.main_queue.id
 }
 
-# S3
-output "s3_smk_output_bucket_id" {
-  value = aws_s3_bucket.output.id
-}
+# MODULES produce multiple resources. Lazy so not adding.
 
-output "s3_smk_output_bucket_access_blk_id" {
-  value = aws_s3_bucket_public_access_block.output_access.id
-}
+# S3 module output
 
-output "s3_smk_output_server_side_encryption_id" {
-  value = aws_s3_bucket_server_side_encryption_configuration.output_encryption.id
-}
+# Lambda s3 notification module output.
 
-output "s3_smk_output_bucket_versioning_id" {
-  value = aws_s3_bucket_versioning.output_versioning.id
-}
+# Lambda module output.
 
 # IAM
 output "iam_ec2_inst_profile_id" {
