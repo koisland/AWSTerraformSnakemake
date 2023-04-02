@@ -20,8 +20,9 @@ def lambda_handler(event, context):
         print("CONTENT TYPE: " + response['ContentType'])
 
         # We don't care about the content here since this is just a proof-of-concept.
+        fname, _ = os.path.splitext(os.path.basename(key))
         analyzer_job = batch.submit_job(
-            jobName=key,
+            jobName=f"job_{fname}",
             jobQueue=os.environ.get("job_queue"),
             jobDefinition=os.environ.get("job_def"),
             containerOverrides={
