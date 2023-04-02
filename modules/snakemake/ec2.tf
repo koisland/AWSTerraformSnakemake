@@ -1,6 +1,6 @@
 # IAM Role for underlying EC2 instances
 resource "aws_iam_role" "ec2_role" {
-  name = "${var.name}_ec2_role"
+  name = "${var.name}-ec2-role"
   assume_role_policy = jsonencode({
     "Version" = "2012-10-17",
     "Statement" = [{
@@ -19,7 +19,7 @@ resource "aws_iam_role" "ec2_role" {
 
 # Assign the EC2 role to the EC2 profile
 resource "aws_iam_instance_profile" "ec2_profile" {
-  name = "${var.name}_ec2_profile"
+  name = "${var.name}-ec2-profile"
   role = aws_iam_role.ec2_role.name
 }
 

@@ -19,15 +19,21 @@ def lambda_handler(event, context):
         response = s3.get_object(Bucket=bucket, Key=key)
         print("CONTENT TYPE: " + response['ContentType'])
 
+        # create custom file from response
+        config_yaml_str = {
+            "param": 0
+        }
+
         # We don't care about the content here since this is just a proof-of-concept.
         fname, _ = os.path.splitext(os.path.basename(key))
         analyzer_job = batch.submit_job(
             jobName=f"job_{fname}",
             jobQueue=os.environ.get("job_queue"),
             jobDefinition=os.environ.get("job_def"),
-            containerOverrides={
-                'command': ['snakemake', '-h']
-            })
+            parameters={
+                'config': json.dumps(config_yaml_str)
+            },
+        )
 
         return analyzer_job
     except Exception as e:
