@@ -18,7 +18,7 @@ module "lambda_function" {
     "Statement" : [
       {
         "Action" : [
-          "s3:*GetObject"
+          "s3:GetObject"
         ],
         "Resource" : [
           "arn:aws:s3:::${module.s3_smk_input.s3_bucket_id}/*"
@@ -34,6 +34,13 @@ module "lambda_function" {
         "Resource" : "*",
         "Effect" : "Allow"
       },
+      {
+        "Action" : [
+          "kms:Decrypt"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow"
+      }
     ]
   })
 
