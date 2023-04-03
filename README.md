@@ -1,5 +1,5 @@
 # AWS Batch Snakemake Pipeline with Terraform
-![![Terraform](https://github.com/koisland/AWSTerraformSnakemake/actions/workflows/terraform.yml/badge.svg)](https://github.com/koisland/AWSTerraformSnakemake/actions/workflows/terraform.yml)
+[![Terraform](https://github.com/koisland/AWSTerraformSnakemake/actions/workflows/terraform.yml/badge.svg)](https://github.com/koisland/AWSTerraformSnakemake/actions/workflows/terraform.yml)
 
 ## Sources
 Based on the [Automate Terraform with GitHub Actions tutorial](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions).
